@@ -1,4 +1,75 @@
 {% extends "layout.html" %}
 {% block content %}
-data
+<section>
+  <div class="row">
+    <div class="column">
+      <div class="column-content">
+        <h1>About me</h1>
+        <p>I am Kirill Chekmenev, and I am passionate about programming. I think that ability to create web
+          applications will be the future of our modern society, as they will help everyone’s life be better and
+          happier. Hence, I want to learn how to solve problems programmatically and teach others this approach.</p>
+        <div class="button-wrapper">
+          <a href="/projects" class="button"><span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M3.25 3A2.25 2.25 0 001 5.25v9.5A2.25 2.25 0 003.25 17h13.5A2.25 2.25 0 0019 14.75v-9.5A2.25 2.25 0 0016.75 3H3.25zm.943 8.752a.75.75 0 01.055-1.06L6.128 9l-1.88-1.693a.75.75 0 111.004-1.114l2.5 2.25a.75.75 0 010 1.114l-2.5 2.25a.75.75 0 01-1.06-.055zM9.75 10.25a.75.75 0 000 1.5h2.5a.75.75 0 000-1.5h-2.5z"
+                  clip-rule="evenodd" />
+              </svg>
+              My projects</span></a>
+          <a href="#programming" class="button"><span>My programming experience</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <img loading="lazy" src="/static/images/hero5.svg" alt="hero">
+    </div>
+  </div>
+</section>
+<section id="programming">
+  <h2>My skills and programming experience</h2>
+  <div class="skill-bars">
+    <h4>Frontend skills</h4>
+    <div class="bar">
+      <div class="info">
+        <span>JavaScript</span>
+      </div>
+      <div class="progress-line ">
+        <span data-progress="80"></span>
+      </div>
+    </div>
+    <div class="bar">
+      <div class="info">
+        <span>HTML</span>
+      </div>
+      <div class="progress-line">
+        <span data-progress="90"></span>
+      </div>
+    </div>
+    <div class="bar">
+      <div class="info">
+        <span>CSS (SASS)</span>
+      </div>
+      <div class="progress-line">
+        <span data-progress="70"></span>
+      </div>
+    </div>
+    <h4>Backend skills</h4>
+    <div class="bar">
+      <div class="info">
+        <span>Python</span>
+      </div>
+      <div class="progress-line">
+        <span data-progress="95"></span>
+      </div>
+    </div>
+    <div class="bar">
+      <div class="info">
+        <span>MySQL</span>
+      </div>
+      <div class="progress-line">
+        <span data-progress="60"></span>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

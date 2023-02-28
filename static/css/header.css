@@ -1,6 +1,6 @@
 nav {
-  -webkit-backdrop-filter: blur(5px) saturate(150%);
-          backdrop-filter: blur(5px) saturate(150%);
+  -webkit-backdrop-filter: blur(2px) saturate(200%);
+          backdrop-filter: blur(2px) saturate(200%);
   background-image: linear-gradient(-125deg, hsl(var(--clr-background-dark-values)/0.6), hsl(var(--clr-background-dark-values)/0.5) 70%);
 }
 
@@ -19,8 +19,8 @@ main {
 }
 
 nav {
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-          backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+          backdrop-filter: blur(20px) saturate(200%);
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -30,6 +30,7 @@ nav {
   height: min-content;
   padding-block: var(--navbar-vertical-padding);
   z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.125);
   border-top: 1px solid rgba(255, 255, 255, 0.125);
 }
 nav a {
@@ -73,7 +74,6 @@ nav .navbar-menu .navbar-link svg {
 }
 @media screen and (min-width: 53rem) {
   nav {
-    border: none;
     top: 0;
   }
   nav .logo {

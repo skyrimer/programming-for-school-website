@@ -13,7 +13,7 @@ main {
 
 nav {
   @extend %glassy;
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(200%);
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -21,6 +21,7 @@ nav {
   height: min-content;
   padding-block: var(--navbar-vertical-padding);
   z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.125);
   border-top: 1px solid rgba(255, 255, 255, 0.125);
   a {
     text-decoration: none;
@@ -62,7 +63,6 @@ nav {
     }
   }
   @media screen and (min-width: 53rem) {
-    border: none;
     top: 0;
     .logo {
       display: block;

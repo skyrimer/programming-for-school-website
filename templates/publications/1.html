@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="article">
+    <h1>Curve fitting with Python</h1>
+    <article>
+        <h2>The problem</h2>
+        <p>As I started to do my math IA, one of the problems that appeared on my way was curve fitting. Since finding
+            the guitar's precise surface area requires calculus, the only feasible way was to plot the outline using the
+            points and convert those points into functions. However, none of the applications and websites that I have
+            used would give me a mathematical function that would define the curve of best fit for the data set: it was
+            either impossible to copy, the number of decimal places would not be enough, or the correlation coefficient
+            would show an uncertain value.</p>
+        <p>As a result, I created a Python script that would take a set of points and return the type of the curve, its
+            parameters, and the correlation coefficient (where 1 is the ideal fit).</p>
+        <h2>Solution</h2>
+        <p>I know that math is a scary science for most of the population, so I will not go in-depth but describe what
+            the script does. For it to work, I created a file where I stored a list of points I needed to get a curve.
+            The reason for creating an external file was that it was easy to edit for another set of curves.</p>
+        <p>When I had my points ready, I ran the script. Firstly it splits the x-coordinates and the y-coordinates into
+            two separate lists and converts each number to a NumPy float. This move is essential for curve-fitting
+            because… I have no idea, honestly, between the regular float in Python and NumPy float but the documentation
+            and other tutorials did it, and it works this way.</p>
+        <p>Then comes the magic of Python. Using NumPy polift and some statistics, I found all the best-fit curves with
+            polynomials from zero to nine and their correlation coefficients. Someone might ask: but what about other
+            functions like reciprocal or power fits? Since I did not want to deal with complex integration techniques,
+            extra functions that I checked were separated into the additional list, and the same operation was done. As
+            an outcome, I had a list of curve names, their parameters, and correlation coefficients.</p>
+        <p>The last thing that remained was to filter the data by its correlation and print it to the console. All of
+            the mentioned above resulted in the following code:</p>
+        <pre><code class="language-python line-numbers">
+import math
+
+import numpy as np
+from scipy.optimize import curve_fit
+
+from data import data
+
+DECIMAL_PLACES = 10
+ACCEPTED_CORRELATION = 0.995
+function_list = [
+    ["ReciprocalFit 0/1", lambda x, a, b, c, d: a/(b*x+c) + d],
+    ["ReciprocalFit 0/2", lambda x, a, b, c, d, e: a/(b*x**2+c*x+d) + e],
+    ["ReciprocalFit 0/3", lambda x, a, b, c, d,
+        e, f: a/(b*x**3+c*x**2+d*x+e) + f],
+    ["ReciprocalFit 1/1", lambda x, a, b, c, d, e: (a*x+b)/(c*x+d) + e],
+    ["ReciprocalFit 1/2", lambda x, a, b, c,
+        d, e, f: (a*x+b)/(c*x**2+d*x+e) + f],
+    ["ReciprocalFit 1/3", lambda x, a, b, c, d, e,
+        f, g: (a*x+b)/(c*x**3+d*x**2+e*x+f) + g],
+    ["Power b", lambda x, a, b, c: a * x ** b + c],
+    ["Sin", lambda x, a, b, c, d: a * np.sin(b*x+c)+d],
+    ["Tan", lambda x, a, b, c, d: a * np.tan(b*x+c)+d],
+    ["Logg", lambda x, a, b, c, d, e: a*np.log(b*x+c)/np.log(d)+e],
+]
+
+
+def getCorrelationCoefficient(x: np.array, y: np.array, parameters, fit_function) -> np.float64:
+    residuals = y - fit_function(x, *parameters)
+    return 1 - (np.sum(residuals**2) / np.sum((y-np.mean(y))**2))
+
+
+def getBestFitFunction(x, y, fit_function):
+    return curve_fit(f=fit_function, xdata=x, ydata=y, maxfev=1_000_000_000)
+
+
+def getAllFunctionsFit(x, y, function_list):
+    results = []
+
+    for i in range(1, 10):
+        parameters = np.polyfit(x, y, i)
+        p = np.poly1d(parameters)
+        ybar = np.sum(y)/len(y)
+        ssreg = np.sum((p(x) - ybar)**2)
+        sstot = np.sum((y - ybar)**2)
+        results.append([f"Polynomial order {i}", [np.round(parameter, DECIMAL_PLACES)
+                                                  for parameter in parameters], np.round(ssreg / sstot, DECIMAL_PLACES)])
+    for function_ in function_list:
+        parameters, _ = getBestFitFunction(x, y, function_[-1])
+        r2 = getCorrelationCoefficient(x, y, parameters, function_[-1])
+        results.append([function_[0], [np.round(parameter, DECIMAL_PLACES)
+                       for parameter in parameters], np.round(r2, DECIMAL_PLACES)])
+    return results
+
+
+x, y = np.array([np.float64(point[0]) for point in data]), np.array(
+    [np.float64(point[1]) for point in data])
+
+
+results = getAllFunctionsFit(x, y, function_list)
+results.sort(key=lambda result: result[-1])
+for result in filter(lambda result: result[-1] > ACCEPTED_CORRELATION, results):
+    print(*result)
+    print()
+
+# print(getCorrelationCoefficient(
+#     x, y, data, lambda x, a, b, c, d, e, f, g, h, i:
+#         a*x**8 + b*x**7 + c*x**6 + d*x**5 + e*x**4 + f*x**3 + g*x**2 + h*x + i))
+              </code></pre>
+        <h2>Evaluation</h2>
+        <p>I know that it is a highly narrow application of programming, yet it is an application that saved me much
+            time. By making this script, I had a clear overview of how the outline acts at any segment in under seconds
+            while I had room to pick the function that would have the best visual fit. Moreover, since it is done
+            programmatically, the effect of human error is minimized while the precision in calculations is maximized.
+        </p>
+        <p>A manual alternative would mean that inserting the list of points several times would take more time than it
+            took me to write the code.</p>
+        <h2>Possible improvements</h2>
+        <p>The room for improvement is only limited by your coding and maths skills. Finding the exact points that would
+            ideally fit the outline segment still took some time. Logically speaking, I am sure it is possible to load
+            all points into a file, run through the script, and then get a list of functions defining the entire guitar.
+            On the other hand, it would require advanced mathematics knowledge that I do not currently have.</p>
+        <p>Another improvement would be the representation. Printing the answer to a console does its function of
+            communicating the result, but it could be done in a more user-friendly way using some libraries. I was too
+            lazy to do it in this case, but it is still a point to consider.</p>
+    </article>
+</section>
+{% endblock %}

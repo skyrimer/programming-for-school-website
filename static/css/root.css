@@ -7,11 +7,12 @@
   --height-burger: calc(var(--navbar-vertical-padding) * 2 + var(--navbar-content-size));
   --transition-duration: 0.5s;
   --section-gap: min(6rem, 6vh);
-  --clr-primary: hsl(180, 66%, 63%);
-  --clr-secondary: hsl(345, 57%, 34%);
+  --clr-primary: hsl(188, 58%, 72%);
+  --clr-secondary: hsl(209, 40%, 38%);
   --clr-button-background: hsl(239, 80%, 10%);
   --gradient-background: linear-gradient(45deg, hsl(209, 40%, 38%), hsl(345, 57%, 34%));
   --clr-background-dark-values: 219 40% 11%;
+  --clr-background-dark-values: 272 86% 8%;
   --clr-background-dark: hsl(var(--clr-background-dark-values));
   --clr-text: hsl(0, 0%, 92%);
   --transition-time: 0.3s;

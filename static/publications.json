@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "heading": "Curve fitting with Python",
+    "description": "As I started to do my math internal assessment, I began looking for utilities to help me with it. I needed a program to help me set the points on a 2d plane, find the best fit function and give me the correlation coefficient. Soon it turned out that the last two issues were almost impossible to do on one website, so I had to play around with it."
+  },
+  {
+    "id": 2,
+    "heading": "Folder and file manager",
+    "description": "I had never thought that I would need to have a file naming system. Here I am scrolling through my TOK files that are called \"TOK\", \"TOK thing\", \"TOK very thing\", \"TOK thingy thing\", and \"TOK 3 things\"... If you don't want to repeat my mistakes, you can think of the systemising this process, and programming can help you with it."
+  },
+  {
+    "id": 3,
+    "heading": "Productive autorun",
+    "description": "As a student with a lot of interests and one old laptop for all of them, sometimes I wish I had a different autorun depending on what I am going to do. For instance, why would I need to have OneDrive and Microsoft Teams opening if I want to play some video games and need the best performance possible? So, creating a program that can find and run multiple background processes at once would be excellent..."
+  },
+  {
+    "id": 4,
+    "heading": "Custom schedule",
+    "description": "Due to our fantastic school management, the time and place of various lessons change throughout the year. It is tedious to track all the changes while keeping track of all your extra activities. Also, the school schedule looks terrible. Considering all the troubles above, it makes sense to create your adaptable timetable that would look amazing through the power of CSS and help you plan your time wisely."
+  },
+  {
+    "id": 5,
+    "heading": "Voice Assistant",
+    "description": "Sometimes in the flow of work, it is hard to find something yourself, and you wish to have a friend who would do something for you. While I can not help you make friends, creating a voice assistant that would recognise your commands and help you google, send messages, control music or do whatever you want is helpful and can help with studying."
+  },
+  {
+    "id": 6,
+    "heading": "Website blocker with timer",
+    "description": "Since everyone tends to procrastinate to a certain extent, it is helpful to restrict yourself from doing something. However, it is often hard to gain enough willpower to close TikTok or YouTube since these apps are designed to be addictive. Hence, the way to focus on studying is to get a small helper that automatically blocks these websites as soon as the time runs out."
+  }
+]

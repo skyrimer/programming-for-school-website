@@ -2,11 +2,51 @@
 @use "header";
 @use "footer";
 @import "mixins";
+.loader-wrapper {
+  position: fixed;
+  inset: 0;
+  transition: opacity 0.5s ease;
+}
+.lds-dual-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid var(--clr-primary);
+  border-color: var(--clr-primary) transparent var(--clr-primary) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.main-wrapper {
+  opacity: 0;
+}
+html {
+  scroll-padding-top: 6rem;
+}
 body {
   position: relative;
-  background-image: var(--gradient-background);
+  background-image: radial-gradient(at top left, hsl(209, 40%, 38%), hsl(336, 54%, 28%));
   background-attachment: fixed;
-  background-size: 120%;
+  background-position: center;
+  background-size: cover;
 }
 .circle {
   position: fixed;
@@ -20,7 +60,7 @@ body {
   height: 10vw;
   border-radius: 1rem;
   box-shadow: var(--shadow-l);
-  animation: circles 2s ease-in-out infinite alternate;
+  animation: circles 5s ease-in-out infinite alternate;
   @keyframes circles {
     to {
       transform: translateY(20%);
@@ -94,7 +134,6 @@ h4 {
 
 h1 {
   color: var(--clr-primary);
-
   font-size: calc(1.3rem + 1.8vw);
 }
 h2 {
@@ -174,6 +213,7 @@ a.link-underline {
   padding: calc(1rem + 2vw);
   flex: 1 1 400px;
   border-radius: 1rem;
+  border: 1px solid hsla(0, 0%, 100%, 0.15);
   .card-text {
     margin-bottom: 2rem;
   }
@@ -207,14 +247,21 @@ a.link-underline {
     outline: 0;
   }
   span {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
     font-family: "Nunito", sans-serif;
     font-weight: 700;
+    font-style: italic;
     background-color: var(--clr-button-background);
     padding: 0.8em 1.6em;
     border-radius: 0.5em;
     width: 100%;
     height: 100%;
     transition: var(--transition-time);
+    svg {
+      height: 1.2em;
+    }
   }
   &:hover span {
     background: none;
@@ -223,20 +270,100 @@ a.link-underline {
     transform: scale(0.9);
   }
 }
-.c-scrollbar {
-  z-index: 11;
-}
-.c-scrollbar_thumb {
-  background-color: var(--clr-text);
-}
 
-.transition-swup {
-  transition: calc(var(--transition-time) * 2);
-  opacity: 1;
-  transform: none;
+.skill-bars {
+  @extend %glassy;
+  padding: 2.5rem 3rem;
+  border-radius: 1rem;
 }
-
-html.is-animating .transition-swup {
-  transform: translateY(200px);
+.skill-bars .bar {
+  margin: 2rem 0;
+}
+.skill-bars .bar:first-child {
+  margin-top: 0px;
+}
+.skill-bars .bar .info {
+  margin-bottom: 0.5rem;
+}
+.skill-bars .bar .info span {
+  font-size: 17px;
   opacity: 0;
+}
+@keyframes showText {
+  100% {
+    opacity: 1;
+  }
+}
+.skill-bars .bar .progress-line {
+  height: 0.7rem;
+  width: 100%;
+  background: var(--clr-text);
+  position: relative;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: 0.7rem;
+  border: 1px solid var(--clr-secondary);
+}
+@keyframes animate {
+  100% {
+    transform: scaleX(1);
+  }
+}
+.bar .progress-line span {
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background-color: var(--clr-secondary);
+}
+.progress-line span::before {
+  position: absolute;
+  content: "";
+  top: -10px;
+  right: 0;
+  height: 0;
+  width: 0;
+  border: 7px solid transparent;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  border-top-color: hsl(var(--clr-background-dark-values));
+  opacity: 0;
+}
+.progress-line span::after {
+  position: absolute;
+  top: -2em;
+  right: 0;
+  font-weight: 500;
+  background-color: hsl(var(--clr-background-dark-values));
+  color: #fff;
+  padding: 0.2em 0.6em;
+  font-size: 12px;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+.progress-line span::after {
+  content: attr(data-progress) "%";
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background-image: linear-gradient(
+    45deg,
+    hsl(var(--clr-background-dark-values) / 0.8),
+    hsl(var(--clr-background-dark-values) / 0.7)
+  );
+  backdrop-filter: blur(2px);
+}
+
+article {
+  max-width: 100ch;
+}
+.article {
+  display: grid;
+  place-items: center;
+  h2 {
+    margin: 1em 0 0.5em;
+  }
 }

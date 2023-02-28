@@ -4,6 +4,7 @@
   width: 100%;
   padding: var(--section-gap) 0 calc(var(--section-gap) * 2);
   border-bottom: 1px solid transparent;
+  border-radius: 0;
   .container {
     display: flex;
     justify-content: center;
@@ -54,8 +55,7 @@
     font-weight: 300;
     color: rgba(255, 255, 255, 0.8);
     display: block;
-    transition: color var(--transition-time) ease,
-                transform var(--transition-time) ease;
+    transition: color var(--transition-time) ease, transform var(--transition-time) ease;
     &:hover {
       color: var(--clr-primary);
       transform: translateX(0.5rem);
@@ -65,17 +65,21 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 3rem;
-    width: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background-color: rgba(255, 255, 255, 0.2);
     margin: 0 1.5rem 1.5rem 0;
     border-radius: 50%;
     color: var(--clr-text);
-    transition: color var(--transition-time) ease,
-                background-color var(--transition-time) ;
+    transition: color var(--transition-time) ease, background-color var(--transition-time);
     &:hover {
-      color: var(--clr-button-background);
+      color: var(--clr-secondary);
       background-color: var(--clr-text);
+    }
+    img,
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 }
