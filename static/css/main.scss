@@ -1,0 +1,242 @@
+@use "root";
+@use "header";
+@use "footer";
+@import "mixins";
+body {
+  position: relative;
+  background-image: var(--gradient-background);
+  background-attachment: fixed;
+  background-size: 120%;
+}
+.circle {
+  position: fixed;
+  z-index: -1;
+  background-image: linear-gradient(
+    125deg,
+    hsla(0, 0%, 100%, 0.15),
+    hsla(0, 0%, 100%, 0.05) 70%
+  );
+  width: 10vw;
+  height: 10vw;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-l);
+  animation: circles 2s ease-in-out infinite alternate;
+  @keyframes circles {
+    to {
+      transform: translateY(20%);
+    }
+  }
+  &:nth-child(1) {
+    top: 10%;
+    left: 5%;
+  }
+  &:nth-child(2) {
+    top: 20%;
+    left: 80%;
+  }
+  &:nth-child(3) {
+    top: 60%;
+    left: 90%;
+  }
+  &:nth-child(4) {
+    top: 70%;
+    left: 10%;
+  }
+  &:nth-child(5) {
+    top: 5%;
+    left: 50%;
+  }
+  &:nth-child(6) {
+    top: 50%;
+    left: 70%;
+  }
+  &:nth-child(7) {
+    top: 30%;
+    left: 30%;
+  }
+  &:nth-child(8) {
+    top: 60%;
+    left: 40%;
+  }
+}
+.container {
+  width: min(var(--container-width), 90%);
+  margin-inline: auto;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: calc(var(--section-gap) * 2);
+}
+.glassy {
+  @extend %glassy;
+}
+section {
+  width: min(var(--container-width), 90%);
+  border-radius: 1rem;
+  &.glassy {
+    padding: 5vh 5vw;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Nunito", sans-serif;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+h1 {
+  color: var(--clr-primary);
+
+  font-size: calc(1.3rem + 1.8vw);
+}
+h2 {
+  font-size: calc(1.2rem + 1.7vw);
+}
+h3 {
+  color: var(--clr-primary);
+  font-size: calc(1.1rem + 1vw);
+}
+h4 {
+  font-size: calc(1rem + 0.8vw);
+}
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+
+a.link-underline {
+  font-family: "Nunito", sans-serif;
+  line-height: 1.2;
+  font-weight: 700;
+  position: relative;
+  padding: 0.3em 0.3em;
+  color: var(--clr-text);
+  font-style: italic;
+  font-weight: 700;
+  transition: color var(--transition-time) ease;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    border-radius: 0.1em;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-time) ease;
+  }
+  &:hover,
+  &.active {
+    color: var(--clr-primary);
+    &::before {
+      transform-origin: left;
+      transform: scaleX(1);
+    }
+  }
+}
+.row {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  .column {
+    flex: 1 1 300px;
+    img:only-child {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.cards-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+.card {
+  @extend %glassy;
+  display: flex;
+  flex-direction: column;
+  padding: calc(1rem + 2vw);
+  flex: 1 1 400px;
+  border-radius: 1rem;
+  .card-text {
+    margin-bottom: 2rem;
+  }
+  .button-wrapper {
+    justify-self: flex-end;
+    margin: auto 0 0;
+  }
+}
+.button-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-block: 3rem;
+}
+.button {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-text);
+  background-image: var(--gradient-background);
+  border: 0;
+  border-radius: 8px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  transition: outline var(--transition-time), transform var(--transition-time);
+  &:active,
+  &:hover {
+    outline: 0;
+  }
+  span {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    background-color: var(--clr-button-background);
+    padding: 0.8em 1.6em;
+    border-radius: 0.5em;
+    width: 100%;
+    height: 100%;
+    transition: var(--transition-time);
+  }
+  &:hover span {
+    background: none;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+}
+.c-scrollbar {
+  z-index: 11;
+}
+.c-scrollbar_thumb {
+  background-color: var(--clr-text);
+}
+
+.transition-swup {
+  transition: calc(var(--transition-time) * 2);
+  opacity: 1;
+  transform: none;
+}
+
+html.is-animating .transition-swup {
+  transform: translateY(200px);
+  opacity: 0;
+}

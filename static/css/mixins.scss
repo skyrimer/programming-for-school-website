@@ -1,0 +1,9 @@
+%glassy {
+  // background-color: rgba(var(--clr-background-dark-values),0.7);
+  backdrop-filter: blur(5px) saturate(150%);
+  background-image: linear-gradient(
+    -125deg,
+    hsl(var(--clr-background-dark-values) / 0.6),
+    hsl(var(--clr-background-dark-values) / 0.5) 70%
+  );
+}

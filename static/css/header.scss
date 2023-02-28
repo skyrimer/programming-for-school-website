@@ -1,0 +1,79 @@
+@import "mixins";
+body.lock {
+  overflow-y: hidden;
+}
+main {
+  overflow: hidden;
+  margin: var(--section-gap) 0 calc(var(--height-burger) + 1rem) 0;
+  @media screen and (min-width: 52rem) {
+  margin: calc(var(--section-gap) + var(--height-burger)) 0 0  0;
+
+  }
+}
+
+nav {
+  @extend %glassy;
+  backdrop-filter: blur(20px) saturate(180%);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: var(--height-burger);
+  height: min-content;
+  padding-block: var(--navbar-vertical-padding);
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.125);
+  a {
+    text-decoration: none;
+    color: var(--clr-text);
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .logo {
+    display: none;
+    height: var(--navbar-content-size);
+    img {
+      height: 100%;
+    }
+  }
+  .navbar-menu {
+    display: flex;
+    text-align: center;
+    list-style: none;
+    justify-content: space-around;
+    width: 100%;
+    .navbar-link {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 3px;
+      transition: var(--transition-duration);
+      font-size: 0.8rem;
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: currentColor;
+      }
+    }
+  }
+  @media screen and (min-width: 53rem) {
+    border: none;
+    top: 0;
+    .logo {
+      display: block;
+    }
+    .navbar-menu {
+      width: auto;
+      gap: 3rem;
+      .navbar-link {
+        font-size: 1.2rem;
+        flex-direction: row;
+      }
+    }
+  }
+}
